@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Organisasi Anda</title>
+    <!-- Impor Google Fonts untuk tampilan yang bersih -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* * KUSTOMISASI DASAR 
+         * Ubah nilai variabel di bawah ini untuk mengubah palet warna situs dengan mudah.
+         */
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #2c3e50;
+            --color-primary: #2980b9;  /* Biru */
+            --color-secondary: #27ae60; /* Hijau */
+            --color-accent: #c0392b;   /* Merah */
+            --color-card-bg: #f8f9fa;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* Reset dan Pengaturan Dasar */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            background-image: 
+                linear-gradient(to right, rgba(41, 128, 185, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(41, 128, 185, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Kursor Dinamis */
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        body:hover #cursor-dot {
+            opacity: 1;
+        }
+
+        /* Kontainer Utama */
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            background: var(--color-card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            border: 1px solid #e9ecef;
+            /* Animasi saat halaman dimuat */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInContainer 0.8s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes fadeInContainer {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Bagian Header */
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem auto;
+            border: 4px solid var(--color-primary);
+            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.2);
+        }
+
+        .org-name {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .org-description {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        /* Daftar Tautan */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .link-item {
+            display: block;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 400;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            /* Animasi untuk setiap tautan */
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleInLink 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .link-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* Animasi untuk memunculkan tautan satu per satu */
+        .link-item:nth-child(1) { animation-delay: 0.5s; }
+        .link-item:nth-child(2) { animation-delay: 0.6s; }
+        .link-item:nth-child(3) { animation-delay: 0.7s; }
+        .link-item:nth-child(4) { animation-delay: 0.8s; }
+        .link-item:nth-child(5) { animation-delay: 0.9s; }
+
+
+        @keyframes scaleInLink {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Ikon Sosial Media */
+        .socials {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-link svg {
+            width: 28px;
+            height: 28px;
+            fill: #bdc3c7;
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-link:hover svg {
+            transform: scale(1.2);
+        }
+        .social-link.instagram:hover svg { fill: #e1306c; }
+        .social-link.twitter:hover svg { fill: #1da1f2; }
+        .social-link.website:hover svg { fill: var(--color-secondary); }
+        .social-link.email:hover svg { fill: var(--color-accent); }
+        
+        /* Tombol Salin Tautan */
+        .copy-button {
+            margin-top: 2rem;
+            background: none;
+            border: 2px solid var(--color-secondary);
+            color: var(--color-secondary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-family);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background-color: var(--color-secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .copy-button.copied {
+            background-color: var(--color-secondary);
+            color: white;
+            border-color: var(--color-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Kursor kustom yang mengikuti mouse -->
+    <div id="cursor-dot"></div>
+
+    <!-- Ganti konten di bawah ini dengan informasi organisasi Anda -->
+    <main class="container">
+        <header class="header">
+            <!-- Ganti 'src' dengan URL logo organisasi Anda -->
+            <img src="logo.png" alt="Logo Organisasi" class="logo">
+            <h1 class="org-name">DPC KESAN Sinjai</h1>
+            <p class="org-description">Dewan Pengurus Cabang Kebangkitan Siswa Nusantara Kabupaten Sinjai | Nasionalis - Pluralis - Religius</p>
+        </header>
+
+        <section class="links-container">
+            <!-- Ganti '#' dengan tautan asli Anda dan ubah teksnya -->
+            <a href="https://pdp-kesan-sinjai.vercel.app" target="_blank" class="link-item">Formulir Pendaftaran</a>
+            <a href="blank.html" target="_blank" class="link-item">Akun Instagram</a>
+            <a href="blank.html" target="_blank" class="link-item">Dokumentasi Kegiatan KESAN</a>
+            <a href="blank.html" target="_blank" class="link-item">Karya KESAN</a>
+
+        <button id="copyButton" class="copy-button">Salin Tautan Halaman Ini</button>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorDot = document.getElementById('cursor-dot');
+            const copyButton = document.getElementById('copyButton');
+
+            // --- Fungsionalitas Kursor Dinamis ---
+            window.addEventListener('mousemove', e => {
+                // Menggunakan transform untuk performa yang lebih baik
+                cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            });
+
+            // Menambahkan efek saat hover di atas tautan
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorDot.style.transform = `translate(${event.clientX}px, ${event.clientY}px) scale(4)`;
+                    cursorDot.style.backgroundColor = 'rgba(41, 128, 185, 0.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorDot.style.transform = `translate(${event.clientX}px, ${event.clientY}px) scale(1)`;
+                    cursorDot.style.backgroundColor = 'var(--color-primary)';
+                });
+            });
+
+
+            // --- Fungsionalitas Tombol Salin Tautan ---
+            copyButton.addEventListener('click', () => {
+                // Membuat elemen textarea sementara untuk menyalin teks
+                const textArea = document.createElement('textarea');
+                textArea.value = window.location.href;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyButton.textContent = 'Tautan Berhasil Disalin!';
+                    copyButton.classList.add('copied');
+                } catch (err) {
+                    console.error('Tidak dapat menyalin tautan:', err);
+                    copyButton.textContent = 'Gagal Menyalin';
+                }
+                document.body.removeChild(textArea);
+
+                // Mengembalikan teks tombol setelah beberapa saat
+                setTimeout(() => {
+                    copyButton.textContent = 'Salin Tautan Halaman Ini';
+                    copyButton.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
+
